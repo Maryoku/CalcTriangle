@@ -44,20 +44,34 @@ namespace CalcTriangle
             }
         }
 
+        public bool Exist
+        {
+            get
+            {
+                bool result;
+                if ((u.Lenght + v.Lenght > w.Lenght) &&
+                    (u.Lenght + w.Lenght > v.Lenght) &&
+                    (v.Lenght + w.Lenght > u.Lenght))
+                {
+                    result = true;
+                }
+                else
+                {
+                    result = false;
+                }
+
+                return result;
+            }
+        }
+
         public bool Right
         {
             get
             {
                 bool result;
-                if (Math.Pow(u.Lenght, 2) + Math.Pow(v.Lenght, 2) == Math.Pow(w.Lenght, 2))
-                {
-                    result = true;
-                }
-                else if (Math.Pow(u.Lenght, 2) + Math.Pow(w.Lenght, 2) == Math.Pow(v.Lenght, 2))
-                {
-                    result = true;
-                }
-                else if (Math.Pow(w.Lenght, 2) + Math.Pow(v.Lenght, 2) == Math.Pow(u.Lenght, 2))
+                if ((Math.Pow(u.Lenght, 2) + Math.Pow(v.Lenght, 2) == Math.Pow(w.Lenght, 2)) ||
+                    (Math.Pow(u.Lenght, 2) + Math.Pow(w.Lenght, 2) == Math.Pow(v.Lenght, 2)) ||
+                    (Math.Pow(w.Lenght, 2) + Math.Pow(v.Lenght, 2) == Math.Pow(u.Lenght, 2)))
                 {
                     result = true;
                 }
@@ -76,15 +90,9 @@ namespace CalcTriangle
             {
                 bool result;
 
-                if (u.Lenght == v.Lenght && u.Lenght != w.Lenght)
-                {
-                    result = true;
-                }
-                else if (u.Lenght == w.Lenght && u.Lenght != v.Lenght)
-                {
-                    result = true;
-                }
-                else if (v.Lenght == w.Lenght && v.Lenght != u.Lenght)
+                if ((u.Lenght == v.Lenght && u.Lenght != w.Lenght) ||
+                    (u.Lenght == w.Lenght && u.Lenght != v.Lenght) ||
+                    (v.Lenght == w.Lenght && v.Lenght != u.Lenght))
                 {
                     result = true;
                 }

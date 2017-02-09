@@ -21,7 +21,7 @@ namespace CalcTriangle
         {
             get
             {
-                return Math.Sqrt(Math.Pow((b.x - a.x), 2) + Math.Pow((b.y - a.y), 2));
+                return Math.Sqrt(Math.Pow((b.X - a.X), 2) + Math.Pow((b.Y - a.Y), 2));
             }
         }
     }

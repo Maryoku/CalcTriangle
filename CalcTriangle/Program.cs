@@ -35,6 +35,15 @@ namespace CalcTriangle
 
             for (int i = 0; i < 4; i++) {
 
+                if(triangleNode[i].Exist) {
+                    Console.WriteLine("Triangle {0} exist", i);
+                }
+                else
+                {
+                    Console.WriteLine("Triangle not exist! Check input.");
+                    Environment.Exit(0);
+                }
+
                 if (triangleNode[i].Isosceles) {
                     avgPerimeter += triangleNode[i].Perimeter;
                     counterIsos++;   

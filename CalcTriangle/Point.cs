@@ -8,13 +8,13 @@ namespace CalcTriangle
 {
     class Point
     {
-        public double x;
-        public double y;
+        public readonly double X;
+        public readonly double Y;
 
         public Point(double x, double y)
         {
-            this.x = x;
-            this.y = y;
+            this.X = x;
+            this.Y = y;
         }
     }
 }
