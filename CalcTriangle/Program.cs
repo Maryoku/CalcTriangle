@@ -10,9 +10,17 @@ namespace CalcTriangle
     {
         static void Main(string[] args)
         {
-            // ?Обработка некорректных данных при создании объекта. Что подразумевается?
-            // ?Реализация алгоритма для n-угольников. Алгоритма вычисления периметра/площади? В этой же программе или отдельной?
-            Point p1 = new Point(0, 3);
+
+            Console.Write("Введите количество вершин: ");
+            int n = int.Parse(Console.ReadLine()); // string to int
+
+            Point[] points = Polygon.Input(n);
+            var area = Polygon.Area(points, n);
+            var perimeter = Polygon.Perimeter(points, n);
+            Console.WriteLine("Площадь многоугольника равна (ч/з треугольники) {0:F2}", area);
+            Console.WriteLine("Периметр многоугольника: {0:F2}", perimeter);
+
+            /*Point p1 = new Point(0, 3);
             Point p2 = new Point(-2, -3);
             Point p3 = new Point(-6, 1);
 
@@ -44,12 +52,12 @@ namespace CalcTriangle
                     Environment.Exit(0);
                 }
 
-                if (triangleNode[i].Isosceles) {
+                if (triangleNode[i].IsIsosceles) {
                     avgPerimeter += triangleNode[i].Perimeter;
                     counterIsos++;   
                 }
 
-                if(triangleNode[i].Right) {
+                if(triangleNode[i].IsRight) {
                     avgArea += triangleNode[i].Area;
                     counterRight++;
                 }
@@ -59,7 +67,7 @@ namespace CalcTriangle
             avgArea /= counterRight;
 
             Console.WriteLine("Average P = {0:F2} {1}", avgPerimeter, counterIsos);
-            Console.WriteLine("Average S = {0:F2} {1}", avgArea, counterRight);
+            Console.WriteLine("Average S = {0:F2} {1}", avgArea, counterRight);*/
         }
     }
 

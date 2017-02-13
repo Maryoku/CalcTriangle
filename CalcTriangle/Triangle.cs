@@ -64,7 +64,7 @@ namespace CalcTriangle
             }
         }
 
-        public bool Right
+        public bool IsRight
         {
             get
             {
@@ -84,7 +84,7 @@ namespace CalcTriangle
             }
         }
 
-        public bool Isosceles
+        public bool IsIsosceles
         {
             get
             {
