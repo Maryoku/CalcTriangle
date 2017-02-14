@@ -56,12 +56,12 @@ namespace CalcTriangle
             for (int i = 0; i < 4; i++)
             {
                 if (triangleNode[i].IsIsosceles) {
-                    avgPerimeter += triangleNode[i].Perimeter;
+                    avgArea += triangleNode[i].Area;
                     counterIsos++;   
                 }
 
                 if(triangleNode[i].IsRight) {
-                    avgArea += triangleNode[i].Area;
+                    avgPerimeter += triangleNode[i].Perimeter;
                     counterRight++;
                 }
             }
