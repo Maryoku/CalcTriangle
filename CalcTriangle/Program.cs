@@ -10,17 +10,11 @@ namespace CalcTriangle
     {
         static void Main(string[] args)
         {
+            /**** Блок основного задания ****/
 
-            Console.Write("Введите количество вершин: ");
-            int n = int.Parse(Console.ReadLine()); // string to int
+            /**** Создание объектов ****/
 
-            Point[] points = Polygon.Input(n);
-            var area = Polygon.Area(points, n);
-            var perimeter = Polygon.Perimeter(points, n);
-            Console.WriteLine("Площадь многоугольника равна (ч/з треугольники) {0:F2}", area);
-            Console.WriteLine("Периметр многоугольника: {0:F2}", perimeter);
-
-            /*Point p1 = new Point(0, 3);
+            Point p1 = new Point(0, 3);
             Point p2 = new Point(-2, -3);
             Point p3 = new Point(-6, 1);
 
@@ -35,23 +29,32 @@ namespace CalcTriangle
             triangleNode[2] = new Triangle(p7, p8, p9);
             triangleNode[3] = new Triangle(p7, p8, p9);
 
+            /****************************************/
+
+            /**** Проверка корректности данных ****/
+
+            for (int i = 0; i < 4; i++)
+            {
+
+                if (!triangleNode[i].Exist)
+                {
+                    Console.WriteLine("Triangle {0} not exist! Check input data.", i);
+                    Environment.Exit(0);
+                }
+            }
+
+            /*************************************/
+
+            /**** Вычисление среднего периметра и средней площади ****/
+
             double avgPerimeter = 0;
             double avgArea = 0;
 
             int counterIsos = 0;
             int counterRight = 0;
 
-            for (int i = 0; i < 4; i++) {
-
-                if(triangleNode[i].Exist) {
-                    Console.WriteLine("Triangle {0} exist", i);
-                }
-                else
-                {
-                    Console.WriteLine("Triangle not exist! Check input.");
-                    Environment.Exit(0);
-                }
-
+            for (int i = 0; i < 4; i++)
+            {
                 if (triangleNode[i].IsIsosceles) {
                     avgPerimeter += triangleNode[i].Perimeter;
                     counterIsos++;   
@@ -66,8 +69,22 @@ namespace CalcTriangle
             avgPerimeter /= counterIsos;
             avgArea /= counterRight;
 
-            Console.WriteLine("Average P = {0:F2} {1}", avgPerimeter, counterIsos);
-            Console.WriteLine("Average S = {0:F2} {1}", avgArea, counterRight);*/
+            Console.WriteLine("Average P = {0:F2}", avgPerimeter);
+            Console.WriteLine("Average S = {0:F2}\n", avgArea);
+            
+            /*********************************/
+
+            /**** Блок бонусного задания ****/
+
+            Console.Write("Введите количество вершин многоугольника: ");
+            int n = int.Parse(Console.ReadLine()); // string to int
+
+            Point[] points = Polygon.Input(n);
+            Console.WriteLine("\nПлощадь многоугольника(метод треугольников): {0:F2}", Polygon.AreaTriangle(points, n));
+            Console.WriteLine("Площадь многоугольника, координатный метод(корректно для невыпуклых): {0:F2}", Polygon.AreaCoord(points, n));
+            Console.WriteLine("Периметр многоугольника: {0:F2}\n", Polygon.Perimeter(points, n));
+
+            /*******************************/
         }
     }
 

@@ -12,7 +12,7 @@ namespace CalcTriangle
         public static Point[] Input(int n)
         {
             Point[] points = new Point[n];
-            Console.WriteLine("***Кординаты вершины вводить через пробел***");
+            Console.WriteLine("Кординаты вершины (вводить через пробел):");
 
             for (int i = 0; i < n; i++)
             {
@@ -26,27 +26,38 @@ namespace CalcTriangle
             return points;
         }
 
-        public static double Area(Point[] points, int n)
+        public static double AreaTriangle(Point[] points, int n)
         {
-            double s = 0, s2 = 0;
+            double S = 0;
 
             for (int i = 1; i < n - 1; i++)
             {
                 Triangle triangle = new Triangle(points[0], points[i], points[i + 1]);
 
-                s += triangle.Area;
+                S += triangle.Area;
             }
 
-            for (int i = 0; i < n-1; i++)
+            return S;
+        }
+
+        public static double AreaCoord(Point[] points, int n)
+        {
+            double S = 0;
+
+            for (int i = 0; i < n - 1; i++)
             {
-                s2 += points[i].X * points[i + 1].Y - points[i + 1].X * points[i].Y;
+                S += points[i].X * points[i + 1].Y - points[i + 1].X * points[i].Y;
             }
 
-            s2 += points[n-1].X * points[0].Y - points[0].X * points[n-1].Y;
-            s2 /= 2;
-            if (s2 < 0) s2 *= -1;
-            Console.WriteLine("Координатный метод: s2 = {0}", s2);
-            return s;
+            S += points[n - 1].X * points[0].Y - points[0].X * points[n - 1].Y;
+            S /= 2;
+
+            if (S < 0)
+            {
+                S *= -1;
+            }
+
+            return S;
         }
 
         public static double Perimeter(Point[] points, int n)
