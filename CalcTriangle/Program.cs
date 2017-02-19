@@ -22,28 +22,15 @@ namespace CalcTriangle
             Point p8 = new Point(0, -1);
             Point p9 = new Point(-2, 5);
 
-            Triangle[] triangleNode = new Triangle[4];
-
-            triangleNode[0] = new Triangle(p1, p2, p3);
-            triangleNode[1] = new Triangle(p1, p2, p3);
-            triangleNode[2] = new Triangle(p7, p8, p9);
-            triangleNode[3] = new Triangle(p7, p8, p9);
+            Triangle[] triangleNode = new Triangle[]
+            {
+                new Triangle(p1, p2, p3),
+                new Triangle(p1, p2, p3),
+                new Triangle(p7, p8, p9),
+                new Triangle(p7, p8, p9)
+            };
 
             /****************************************/
-
-            /**** Проверка корректности данных ****/
-
-            for (int i = 0; i < 4; i++)
-            {
-
-                if (!triangleNode[i].Exist)
-                {
-                    Console.WriteLine("Triangle {0} not exist! Check input data.", i);
-                    Environment.Exit(0);
-                }
-            }
-
-            /*************************************/
 
             /**** Вычисление среднего периметра и средней площади ****/
 
@@ -53,7 +40,7 @@ namespace CalcTriangle
             int counterIsos = 0;
             int counterRight = 0;
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < triangleNode.Length; i++)
             {
                 if (triangleNode[i].IsIsosceles) {
                     avgArea += triangleNode[i].Area;
@@ -66,23 +53,45 @@ namespace CalcTriangle
                 }
             }
 
-            avgPerimeter /= counterIsos;
-            avgArea /= counterRight;
+            if (counterIsos == 0)
+            {
+                avgArea = 0;
+            }
+            else
+            {
+                avgArea /= counterIsos;
+            }
 
+            if (counterRight == 0)
+            {
+                avgPerimeter = 0;
+            }
+            else
+            {
+                avgPerimeter /= counterRight;
+            }
+            
             Console.WriteLine("Average P = {0:F2}", avgPerimeter);
             Console.WriteLine("Average S = {0:F2}\n", avgArea);
-            
+
             /*********************************/
 
             /**** Блок бонусного задания ****/
 
-            Console.Write("Введите количество вершин многоугольника: ");
-            int n = int.Parse(Console.ReadLine()); // string to int
+            Point[] p = new Point[]
+            {
+                new Point(0.6, 2.1),
+                new Point(1.8, 3.6),
+                new Point(2.2, 2.3),
+                new Point(3.6, 2.4),
+                new Point(3.1, 0.5)
+            };
 
-            Point[] points = Polygon.Input(n);
-            Console.WriteLine("\nПлощадь многоугольника(метод треугольников): {0:F2}", Polygon.AreaTriangle(points, n));
-            Console.WriteLine("Площадь многоугольника, координатный метод(корректно для невыпуклых): {0:F2}", Polygon.AreaCoord(points, n));
-            Console.WriteLine("Периметр многоугольника: {0:F2}\n", Polygon.Perimeter(points, n));
+
+            Polygon figure = new Polygon(p);
+            Console.WriteLine("Площадь многоугольника(метод треугольников): {0:F2}", figure.AreaTriangle);
+            Console.WriteLine("Площадь многоугольника, координатный метод(корректно для невыпуклых): {0:F2}", figure.AreaCoord);
+            Console.WriteLine("Периметр многоугольника: {0:F2}\n", figure.Perimeter);
 
             /*******************************/
         }

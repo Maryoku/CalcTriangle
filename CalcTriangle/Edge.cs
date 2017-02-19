@@ -8,8 +8,8 @@ namespace CalcTriangle
 {
     class Edge
     {
-        Point a;
-        Point b;
+        public readonly Point a;
+        public readonly Point b;
 
         public Edge(Point a, Point b)
         {
@@ -17,7 +17,7 @@ namespace CalcTriangle
             this.b = b;
         }
 
-        public double Lenght
+        public double Length
         {
             get
             {

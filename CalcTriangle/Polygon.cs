@@ -8,74 +8,77 @@ namespace CalcTriangle
 {
     class Polygon
     {
+        Point[] points;
 
-        public static Point[] Input(int n)
+        public Polygon(Point[] p)
         {
-            Point[] points = new Point[n];
-            Console.WriteLine("Кординаты вершины (вводить через пробел):");
+            this.points = new Point[p.Length];
 
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < p.Length; i++)
             {
-                Console.Write("Введите координаты вершины {0}: ", i + 1);
-                var input = Console.ReadLine().Split(' ');
-                var a = double.Parse(input[0]);
-                var b = double.Parse(input[1]);
-                points[i] = new Point(a, b);
+                points[i] = p[i];
             }
-
-            return points;
         }
 
-        public static double AreaTriangle(Point[] points, int n)
+        public double AreaTriangle
         {
-            double S = 0;
-
-            for (int i = 1; i < n - 1; i++)
+            get
             {
-                Triangle triangle = new Triangle(points[0], points[i], points[i + 1]);
+                double S = 0;
 
-                S += triangle.Area;
+                for (int i = 1; i < points.Length - 1; i++)
+                {
+                    Triangle triangle = new Triangle(points[0], points[i], points[i + 1]);
+
+                    S += triangle.Area;
+                }
+
+                return S;
             }
-
-            return S;
         }
 
-        public static double AreaCoord(Point[] points, int n)
+        public double AreaCoord
         {
-            double S = 0;
-
-            for (int i = 0; i < n - 1; i++)
+            get
             {
-                S += points[i].X * points[i + 1].Y - points[i + 1].X * points[i].Y;
+                double S = 0;
+
+                for (int i = 0; i < points.Length - 1; i++)
+                {
+                    S += points[i].X * points[i + 1].Y - points[i + 1].X * points[i].Y;
+                }
+
+                S += points[points.Length - 1].X * points[0].Y - points[0].X * points[points.Length - 1].Y;
+                S /= 2;
+
+                if (S < 0)
+                {
+                    S *= -1;
+                }
+
+                return S;
             }
-
-            S += points[n - 1].X * points[0].Y - points[0].X * points[n - 1].Y;
-            S /= 2;
-
-            if (S < 0)
-            {
-                S *= -1;
-            }
-
-            return S;
         }
 
-        public static double Perimeter(Point[] points, int n)
+        public double Perimeter
         {
-            double P = 0;
-
-            for (int i = 0; i < n - 1; i++)
+            get
             {
-                Edge w;
-                w = new Edge(points[i], points[i+1]);
-                P += w.Lenght;
+                double P = 0;
+
+                for (int i = 0; i < points.Length - 1; i++)
+                {
+                    Edge w;
+                    w = new Edge(points[i], points[i + 1]);
+                    P += w.Length;
+                }
+
+                Edge v;
+                v = new Edge(points[0], points[points.Length - 1]);
+                P += v.Length;
+
+                return P;
             }
-
-            Edge v;
-            v = new Edge(points[0], points[n - 1]);
-            P += v.Lenght;
-
-            return P;
         }
 
     }
