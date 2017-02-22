@@ -89,11 +89,28 @@ namespace CalcTriangle
 
 
             Polygon figure = new Polygon(p);
-            Console.WriteLine("Площадь многоугольника(метод треугольников): {0:F2}", figure.AreaTriangle);
-            Console.WriteLine("Площадь многоугольника, координатный метод(корректно для невыпуклых): {0:F2}", figure.AreaCoord);
+            Console.WriteLine("Площадь многоугольника(метод треугольников): {0:F2}", figure.AreaTriangleMethod);
+            Console.WriteLine("Площадь многоугольника, координатный метод(корректно для невыпуклых): {0:F2}", figure.AreaCoordMethod);
             Console.WriteLine("Периметр многоугольника: {0:F2}\n", figure.Perimeter);
 
             /*******************************/
+
+
+            /**** Тест перегрузок ****/
+
+            bool pointsEquals = p1 != p2;
+            Console.WriteLine("Points equal: {0}", pointsEquals);
+
+            Edge v = new Edge(p1, p2);
+            Edge w = new Edge(p1, p2);
+
+            bool edgeEquals = v == w;
+            Console.WriteLine("Edges equal: {0}", edgeEquals);
+
+            bool triangleEquals = triangleNode[0] == triangleNode[1];
+            Console.WriteLine("Triangls equal: {0}", triangleEquals);
+
+            /*****************************/
         }
     }
 

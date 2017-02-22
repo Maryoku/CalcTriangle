@@ -8,27 +8,27 @@ namespace CalcTriangle
 {
     class Polygon
     {
-        Point[] points;
+        public readonly  Point[] Points;
 
         public Polygon(Point[] p)
         {
-            this.points = new Point[p.Length];
+            this.Points = new Point[p.Length];
 
             for (int i = 0; i < p.Length; i++)
             {
-                points[i] = p[i];
+                Points[i] = p[i];
             }
         }
 
-        public double AreaTriangle
+        public double AreaTriangleMethod
         {
             get
             {
                 double S = 0;
 
-                for (int i = 1; i < points.Length - 1; i++)
+                for (int i = 1; i < Points.Length - 1; i++)
                 {
-                    Triangle triangle = new Triangle(points[0], points[i], points[i + 1]);
+                    Triangle triangle = new Triangle(Points[0], Points[i], Points[i + 1]);
 
                     S += triangle.Area;
                 }
@@ -37,18 +37,18 @@ namespace CalcTriangle
             }
         }
 
-        public double AreaCoord
+        public double AreaCoordMethod
         {
             get
             {
                 double S = 0;
 
-                for (int i = 0; i < points.Length - 1; i++)
+                for (int i = 0; i < Points.Length - 1; i++)
                 {
-                    S += points[i].X * points[i + 1].Y - points[i + 1].X * points[i].Y;
+                    S += Points[i].X * Points[i + 1].Y - Points[i + 1].X * Points[i].Y;
                 }
 
-                S += points[points.Length - 1].X * points[0].Y - points[0].X * points[points.Length - 1].Y;
+                S += Points[Points.Length - 1].X * Points[0].Y - Points[0].X * Points[Points.Length - 1].Y;
                 S /= 2;
 
                 if (S < 0)
@@ -66,15 +66,15 @@ namespace CalcTriangle
             {
                 double P = 0;
 
-                for (int i = 0; i < points.Length - 1; i++)
+                for (int i = 0; i < Points.Length - 1; i++)
                 {
                     Edge w;
-                    w = new Edge(points[i], points[i + 1]);
+                    w = new Edge(Points[i], Points[i + 1]);
                     P += w.Length;
                 }
 
                 Edge v;
-                v = new Edge(points[0], points[points.Length - 1]);
+                v = new Edge(Points[0], Points[Points.Length - 1]);
                 P += v.Length;
 
                 return P;

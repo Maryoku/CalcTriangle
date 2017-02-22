@@ -8,21 +8,31 @@ namespace CalcTriangle
 {
     class Edge
     {
-        public readonly Point a;
-        public readonly Point b;
+        public readonly Point A;
+        public readonly Point B;
 
         public Edge(Point a, Point b)
         {
-            this.a = a;
-            this.b = b;
+            this.A = a;
+            this.B = b;
         }
 
         public double Length
         {
             get
             {
-                return Math.Sqrt(Math.Pow((b.X - a.X), 2) + Math.Pow((b.Y - a.Y), 2));
+                return Math.Sqrt(Math.Pow((B.X - A.X), 2) + Math.Pow((B.Y - A.Y), 2));
             }
+        }
+
+        public static bool operator ==(Edge v, Edge w)
+        {
+            return w.Length == v.Length;
+        }
+
+        public static bool operator !=(Edge v, Edge w)
+        {
+            return !(w.Length == v.Length);
         }
     }
 }

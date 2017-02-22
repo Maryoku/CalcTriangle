@@ -8,9 +8,9 @@ namespace CalcTriangle
 {
     class Triangle
     {
-        Point a;
-        Point b;
-        Point c;
+        public readonly Point A;
+        public readonly Point B;
+        public readonly Point C;
 
         Edge u;
         Edge v;
@@ -18,25 +18,18 @@ namespace CalcTriangle
 
         public Triangle(Point a, Point b, Point c)
         {
-            this.a = a;
-            this.b = b;
-            this.c = c;
+            this.A = a;
+            this.B = b;
+            this.C = c;
 
             this.u = new Edge(a, b);
             this.v = new Edge(b, c);
             this.w = new Edge(c, a);
 
-            try
+
+            if (!((u.Length + v.Length > w.Length) && (u.Length + w.Length > v.Length) && (v.Length + w.Length > u.Length)))
             {
-                if (!((u.Length + v.Length > w.Length) && (u.Length + w.Length > v.Length) && (v.Length + w.Length > u.Length)))
-                {
-                    throw new Exception();
-                }
-            }
-            catch
-            {
-                Console.WriteLine("Triangle ({0},{1}):({2},{3}):({4},{5}) not exists!", a.X, a.Y, b.X, b.Y, c.X, c.Y);
-                Environment.Exit(0);
+                throw new ArgumentException();
             }
         }
 
@@ -75,6 +68,16 @@ namespace CalcTriangle
                         (u.Length == w.Length && u.Length != v.Length) ||
                         (v.Length == w.Length && v.Length != u.Length));
             }
+        }
+
+        public static bool operator ==(Triangle t1, Triangle t2)
+        {
+            return ((t1.A == t2.A) && (t1.B == t2.B) && (t1.C == t2.C));
+        }
+
+        public static bool operator !=(Triangle t1, Triangle t2)
+        {
+            return (!((t1.A == t2.A) && (t1.B == t2.B) && (t1.C == t2.C)));
         }
     }
 }
